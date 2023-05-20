@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import LoginForm from "./LoginForm";
 
 export default function Login(props) {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function Login(props) {
     return (
         <>
             <h1>Login</h1>
-            <button onClick={handleClick}>Entrar</button>
+            <LoginForm onSubmit={handleClick} />
         </>
     )
 }
