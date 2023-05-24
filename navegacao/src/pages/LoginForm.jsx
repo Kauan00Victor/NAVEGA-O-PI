@@ -8,22 +8,27 @@ export default function LoginForm(props) {
 
     function handleSubmit(event) {
         event.preventDefault()
+        let valido = true;
+
         if (!refEmail.current.value){
             setErroEmail("Email obrigatorio")
             refEmail.current.focus()
+            valido = valido && false;
         } else {
             setErroEmail("")
         }
 
         if(!refSenha.current.value) {
             setErroSenha("Senha obrigatoria")
+            valido = valido && false;
         } else if (refSenha.current.value.length < 3) {
             setErroSenha("Senha com minimo 3 caracteres")
+            valido = valido && false;
         } else {
             setErroSenha("")
         }
 
-        if(erroEmail != "" || erroSenha != "") {
+        if(!valido) {
             return
         }
 
