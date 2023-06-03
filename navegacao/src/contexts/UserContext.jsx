@@ -25,7 +25,7 @@ const UserContext = createContext({
 export function UserContextProvider(props) {
     const [currentUser, setCurrentUser] = useState({ userID: null, logado: false })
 
-    Promise < boolean > async function login(email, senha) {
+    async function login(email, senha) {
         let response = false;
         await signInWithEmailAndPassword(auth, email, senha)
             .then(userCredential => {
