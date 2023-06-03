@@ -13,7 +13,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const auth = getAuth={app};
+const auth = getAuth(app);
 
 const UserContext = createContext({
     userID: null,
@@ -25,8 +25,19 @@ const UserContext = createContext({
 export function UserContextProvider(props) {
     const [currentUser, setCurrentUser] = useState({ userID: null, logado: false })
 
-    function login() {
-        setCurrentUser({ userID: 100, logado: true })
+    Promise < boolean > async function login(email, senha) {
+        let response = false;
+        await signInWithEmailAndPassword(auth, email, senha)
+            .then(userCredential => {
+                setCurrentUser({ userID: userCredential.user.id, logado: true })
+                response = true
+            })
+            .catch((error) => {
+                console.log(error.message)
+                response = false;
+            })
+        return response
+
     }
 
     function logout() {
